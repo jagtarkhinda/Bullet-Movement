@@ -67,6 +67,8 @@ public class GameEngine extends SurfaceView implements Runnable {
     public void updateGame() {
 
         //moving enemy up and down
+
+
         if(enemyMovingDown == true)
         {
             this.enemy.setyPosition(this.enemy.getyPosition() + 30);
@@ -74,6 +76,15 @@ public class GameEngine extends SurfaceView implements Runnable {
         else{
             this.enemy.setyPosition(this.enemy.getyPosition() - 30);
         }
+
+        // update the enemy hitbox
+        Rect enemyHitBox = this.enemy.getHitBox();
+
+        enemyHitBox.left = this.enemy.getxPosition();
+        enemyHitBox.top = this.enemy.getyPosition();
+        enemyHitBox.right = this.enemy.getxPosition() + this.enemy.getWidth();
+        enemyHitBox.bottom = this.enemy.getyPosition() + this.enemy.getWidth();
+        this.enemy.setHitBox(enemyHitBox);
 
         //enemy collision detection with wall
         if(this.enemy.getyPosition() >= this.screenHeight - 400)
@@ -110,12 +121,13 @@ public class GameEngine extends SurfaceView implements Runnable {
         //---------------------------------------------------------
 
 
-        //moving hitbox with the bullet
+        //moving bullet hitbox
         Rect r = this.bullet.getHitBox();
                r.left = newX;
                 r.top = newY;
                 r.right = newX + this.bullet.getWidth();
                r.bottom = newY + this.bullet.getWidth();
+        this.bullet.setHitBox(r);
 
     }
 
@@ -140,6 +152,12 @@ public class GameEngine extends SurfaceView implements Runnable {
                     this.bullet.getxPosition()+this.bullet.getWidth(),
                     this.bullet.getyPosition() + this.bullet.getWidth(),paintbrush);
 
+            //draw bullet hitbox
+            paintbrush.setColor(Color.RED);
+            paintbrush.setStyle(Paint.Style.STROKE);
+            canvas.drawRect(this.bullet.getHitBox(),paintbrush);
+
+
             //draw enemy
             paintbrush.setColor(Color.MAGENTA);
             canvas.drawRect(this.enemy.getxPosition(),
@@ -148,9 +166,9 @@ public class GameEngine extends SurfaceView implements Runnable {
                     this.enemy.getyPosition() + this.enemy.getWidth(),paintbrush);
 
             //draw enemy hitbox
-            paintbrush.setColor(Color.RED);
+            paintbrush.setColor(Color.BLUE);
             paintbrush.setStyle(Paint.Style.STROKE);
-            canvas.drawRect(this.bullet.getHitBox(),paintbrush);
+            canvas.drawRect(this.enemy.getHitBox(),paintbrush);
 
 
             // --------------------------------

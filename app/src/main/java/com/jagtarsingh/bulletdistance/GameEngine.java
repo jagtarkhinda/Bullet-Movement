@@ -60,8 +60,29 @@ public class GameEngine extends SurfaceView implements Runnable {
         }
     }
 
+    boolean enemyMovingDown = true;
+
     // Game Loop methods
     public void updateGame() {
+
+        if(enemyMovingDown == true)
+        {
+            this.enemy.setyPosition(this.enemy.getyPosition() + 5);
+        }
+        else{
+            this.enemy.setyPosition(this.enemy.getyPosition() - 5);
+        }
+
+        //enemy collision detection with wall
+        if(this.enemy.getyPosition() >= this.screenHeight - 400)
+        {
+            enemyMovingDown = false;
+        }
+        else if(this.enemy.getyPosition() <= 0) {
+            enemyMovingDown = true;
+        }
+
+
 
         // 1. Calculate distance between bullet and enemy
 
@@ -80,6 +101,7 @@ public class GameEngine extends SurfaceView implements Runnable {
         int newX = this.bullet.getxPosition() + (int) (xn * 15);
         int newY = this.bullet.getyPosition() + (int) (yn * 15);
 
+        //setting new bullet position
         this.bullet.setxPosition(newX);
         this.bullet.setyPosition(newY);
 

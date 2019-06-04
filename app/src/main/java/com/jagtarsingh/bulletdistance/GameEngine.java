@@ -13,6 +13,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+
 public class GameEngine extends SurfaceView implements Runnable {
     private final String TAG = "VECTOR-MATH";
 
@@ -37,6 +39,9 @@ public class GameEngine extends SurfaceView implements Runnable {
     int SQUARE_WIDTH = 100;
     int score = 0;
 
+    //making ArrayList for square class
+    ArrayList<Square> bullets = new ArrayList<Square>();
+
     public GameEngine(Context context, int screenW, int screenH) {
         super(context);
 
@@ -47,6 +52,12 @@ public class GameEngine extends SurfaceView implements Runnable {
         // set screen height and width
         this.screenWidth = screenW;
         this.screenHeight = screenH;
+
+        //making multiple bullets
+        this.bullets.add(new Square(context, 100, 600, SQUARE_WIDTH));
+        this.bullets.add(new Square(context, 100, 450, SQUARE_WIDTH));
+        this.bullets.add(new Square(context, 100, 300, SQUARE_WIDTH));
+        this.bullets.add(new Square(context, 100, 150, SQUARE_WIDTH));
 
         //initialize sprites
         bullet = new Square(context, 100, 600, SQUARE_WIDTH);
@@ -150,17 +161,41 @@ public class GameEngine extends SurfaceView implements Runnable {
             paintbrush.setStyle(Paint.Style.STROKE);
             paintbrush.setStrokeWidth(8);
 
-            //draw bullet
-            paintbrush.setColor(Color.BLACK);
-            canvas.drawRect(this.bullet.getxPosition(),
-                    this.bullet.getyPosition(),
-                    this.bullet.getxPosition()+this.bullet.getWidth(),
-                    this.bullet.getyPosition() + this.bullet.getWidth(),paintbrush);
+//            //draw bullet
+//            paintbrush.setColor(Color.BLACK);
+//            canvas.drawRect(this.bullet.getxPosition(),
+//                    this.bullet.getyPosition(),
+//                    this.bullet.getxPosition()+this.bullet.getWidth(),
+//                    this.bullet.getyPosition() + this.bullet.getWidth(),paintbrush);
+//
+//            //draw bullet hitbox
+//            paintbrush.setColor(Color.RED);
+//            paintbrush.setStyle(Paint.Style.STROKE);
+//            canvas.drawRect(this.bullet.getHitBox(),paintbrush);
 
-            //draw bullet hitbox
-            paintbrush.setColor(Color.RED);
-            paintbrush.setStyle(Paint.Style.STROKE);
-            canvas.drawRect(this.bullet.getHitBox(),paintbrush);
+            for(int i = 0; i<this.bullets.size(); i++)
+            {
+                //getting x,y of each bullet
+                Square bullet_i = this.bullets.get(i);
+
+                int x = bullet_i.getxPosition();
+                int y = bullet_i.getyPosition();
+
+                //drawing the each bullet
+                paintbrush.setColor(Color.BLACK);
+                paintbrush.setStyle(Paint.Style.FILL);
+
+                canvas.drawRect(x,
+                        y,
+                        x + bullet_i.getWidth(),
+                        y + bullet_i.getWidth(),paintbrush);
+
+                //drawing the hitbox for each bullet
+                paintbrush.setColor(Color.GREEN);
+                paintbrush.setStyle(Paint.Style.FILL);
+                canvas.drawRect(bullet_i.getHitBox(),paintbrush);
+
+            }
 
             //// adding some comments to master branch.
 

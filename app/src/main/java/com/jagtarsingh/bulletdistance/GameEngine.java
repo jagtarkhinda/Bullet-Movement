@@ -63,6 +63,26 @@ public class GameEngine extends SurfaceView implements Runnable {
     // Game Loop methods
     public void updateGame() {
 
+        // 1. Calculate distance between bullet and enemy
+
+        double a = this.enemy.getxPosition() - this.bullet.getxPosition();
+        double b = this.enemy.getyPosition() - this.bullet.getyPosition();
+
+        double d = Math.sqrt((a*a) + (b*b));
+
+        // 2. Calculate xn and xy (how much to move per frame)
+
+        double xn = (a / d);
+        double yn = (b / d);
+
+        // 3. Calculate where to move next (new x,y coordinates)
+
+        int newX = this.bullet.getxPosition() + (int) (xn * 15);
+        int newY = this.bullet.getyPosition() + (int) (yn * 15);
+
+        this.bullet.setxPosition(newX);
+        this.bullet.setyPosition(newY);
+
 
     }
 

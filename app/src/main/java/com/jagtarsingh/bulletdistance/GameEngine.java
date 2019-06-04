@@ -129,6 +129,22 @@ public class GameEngine extends SurfaceView implements Runnable {
                r.bottom = newY + this.bullet.getWidth();
         this.bullet.setHitBox(r);
 
+
+        //Collision detection for bullet
+
+        if(bullet.getHitBox().intersect(enemy.getHitBox()))
+        {
+            this.bullet.setxPosition(100);
+            this.bullet.setyPosition(600);
+
+            //RESET BULLET HITBOX
+            Rect r2 = this.bullet.getHitBox();
+            r2.left = newX;
+            r2.top = newY;
+            r2.right = newX + this.bullet.getWidth();
+            r2.bottom = newY + this.bullet.getWidth();
+            this.bullet.setHitBox(r2);
+        }
     }
 
     public void drawGame() {

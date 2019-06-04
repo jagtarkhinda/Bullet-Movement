@@ -92,6 +92,7 @@ public class GameEngine extends SurfaceView implements Runnable {
         // update the enemy hitbox
         this.enemy.updateHitBox();
 
+
         //enemy collision detection with wall
         if(this.enemy.getyPosition() >= this.screenHeight - 400)
         {
@@ -103,46 +104,56 @@ public class GameEngine extends SurfaceView implements Runnable {
         //---------------------------------------------
 
 
+        //MAKING ALL BULLETS MOVE
 
-        // 1. Calculate distance between bullet and enemy
-
-        double a = this.enemy.getxPosition() - this.bullet.getxPosition();
-        double b = this.enemy.getyPosition() - this.bullet.getyPosition();
-
-        double d = Math.sqrt((a*a) + (b*b));
-
-        // 2. Calculate xn and xy (how much to move per frame)
-
-        double xn = (a / d);
-        double yn = (b / d);
-
-        // 3. Calculate where to move next (new x,y coordinates)
-
-        int newX = this.bullet.getxPosition() + (int) (xn * 15);
-        int newY = this.bullet.getyPosition() + (int) (yn * 15);
-
-        //setting new bullet position
-        this.bullet.setxPosition(newX);
-        this.bullet.setyPosition(newY);
-        //---------------------------------------------------------
-
-
-        //moving bullet hitbox
-        this.bullet.updateHitBox();
-
-        //Collision detection for bullet
-
-        if(bullet.getHitBox().intersect(enemy.getHitBox()))
+        for(int i=0; i < this.bullets.size(); i++)
         {
+            //getting each bullet
 
-            //UPDATING SCORE
-            this.score += 1;
-            // RESETTING BULLET POSITION
-            this.bullet.setxPosition(100);
-            this.bullet.setyPosition(600);
+            Square bullet_i = this.bullets.get(i);
 
-            //RESET BULLET HITBOX
-            this.bullet.updateHitBox();
+
+
+            // 1. Calculate distance between bullet and enemy
+
+            double a = this.enemy.getxPosition() - bullet_i.getxPosition();
+            double b = this.enemy.getyPosition() - bullet_i.getyPosition();
+
+            double d = Math.sqrt((a * a) + (b * b));
+
+            // 2. Calculate xn and xy (how much to move per frame)
+
+            double xn = (a / d);
+            double yn = (b / d);
+
+            // 3. Calculate where to move next (new x,y coordinates)
+
+            int newX = bullet_i.getxPosition() + (int) (xn * 15);
+            int newY = bullet_i.getyPosition() + (int) (yn * 15);
+
+            //setting new bullet position
+
+            bullet_i.setxPosition(newX);
+            bullet_i.setyPosition(newY);
+            //---------------------------------------------------------
+
+
+            //updating bullet hitbox
+            bullet_i.updateHitBox();
+
+            //Collision detection for bullet
+
+            if (bullet_i.getHitBox().intersect(enemy.getHitBox())) {
+
+                //UPDATING SCORE
+                this.score += 1;
+                // RESETTING BULLET POSITION
+                bullet_i.setxPosition(bullet_i.getInitialX());
+                bullet_i.setyPosition(bullet_i.getInitialY());
+
+                //RESET BULLET HITBOX
+                bullet_i.updateHitBox();
+            }
         }
     }
 

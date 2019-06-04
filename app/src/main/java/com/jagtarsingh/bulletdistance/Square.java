@@ -10,9 +10,17 @@ public class Square {
     private int xPosition;
     private int yPosition;
     private int width;
+
+    private  int initialX;
+    private int initialY;
+
     Rect hitBox;
 
     public Square(Context context, int x, int y, int width) {
+
+        this.initialX = x;
+        this.initialY = y;
+
         this.xPosition = x;
         this.yPosition = y;
         this.width = width;
@@ -29,6 +37,22 @@ public class Square {
         this.hitBox.top = this.yPosition;
         this.hitBox.right = this.xPosition + this.getWidth();
         this.hitBox.bottom = this.yPosition + this.getWidth();
+    }
+
+    public int getInitialX() {
+        return initialX;
+    }
+
+    public void setInitialX(int initialX) {
+        this.initialX = initialX;
+    }
+
+    public int getInitialY() {
+        return initialY;
+    }
+
+    public void setInitialY(int initialY) {
+        this.initialY = initialY;
     }
 
     public Rect getHitBox() {

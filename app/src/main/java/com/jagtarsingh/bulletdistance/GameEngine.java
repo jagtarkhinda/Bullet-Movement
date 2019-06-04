@@ -35,6 +35,7 @@ public class GameEngine extends SurfaceView implements Runnable {
 
 
     int SQUARE_WIDTH = 100;
+    int score = 0;
 
     public GameEngine(Context context, int screenW, int screenH) {
         super(context);
@@ -134,6 +135,10 @@ public class GameEngine extends SurfaceView implements Runnable {
 
         if(bullet.getHitBox().intersect(enemy.getHitBox()))
         {
+
+            //UPDATING SCORE
+            this.score += 1;
+            // RESETTING BULLET POSITION
             this.bullet.setxPosition(100);
             this.bullet.setyPosition(600);
 
@@ -185,6 +190,11 @@ public class GameEngine extends SurfaceView implements Runnable {
             paintbrush.setColor(Color.BLUE);
             paintbrush.setStyle(Paint.Style.STROKE);
             canvas.drawRect(this.enemy.getHitBox(),paintbrush);
+
+            // draw the score
+            paintbrush.setTextSize(100);
+            paintbrush.setStrokeWidth(5);
+            canvas.drawText("Score: " + this.score, 10, 100, paintbrush);
 
 
             // --------------------------------

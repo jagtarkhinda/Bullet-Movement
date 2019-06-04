@@ -140,6 +140,7 @@ public class GameEngine extends SurfaceView implements Runnable {
 
             // initialize the canvas
             canvas = holder.lockCanvas();
+
             // --------------------------------
             // @TODO: put your drawing code in this section
 
@@ -161,6 +162,7 @@ public class GameEngine extends SurfaceView implements Runnable {
             paintbrush.setStyle(Paint.Style.STROKE);
             canvas.drawRect(this.bullet.getHitBox(),paintbrush);
 
+            //// adding some comments to master branch.
 
             //draw enemy
             paintbrush.setColor(Color.MAGENTA);

@@ -48,7 +48,7 @@ public class GameEngine extends SurfaceView implements Runnable {
 
         //initialize sprites
         bullet = new Square(context, 100, 600, SQUARE_WIDTH);
-        enemy = new Square(context, 1000, 600, SQUARE_WIDTH);
+        enemy = new Square(context, 1000, 100, SQUARE_WIDTH);
     }
     @Override
     public void run() {
@@ -62,6 +62,8 @@ public class GameEngine extends SurfaceView implements Runnable {
 
     // Game Loop methods
     public void updateGame() {
+
+
     }
 
     public void drawGame() {
@@ -74,7 +76,23 @@ public class GameEngine extends SurfaceView implements Runnable {
 
             // set the game's background color
             canvas.drawColor(Color.argb(255,255,255,255));
+            //set stroke
+            paintbrush.setStyle(Paint.Style.STROKE);
+            paintbrush.setStrokeWidth(8);
 
+            //draw bullet
+            paintbrush.setColor(Color.BLACK);
+            canvas.drawRect(this.bullet.getxPosition(),
+                    this.bullet.getyPosition(),
+                    this.bullet.getxPosition()+this.bullet.getWidth(),
+                    this.bullet.getyPosition() + this.bullet.getWidth(),paintbrush);
+
+            //draw enemy
+            paintbrush.setColor(Color.MAGENTA);
+            canvas.drawRect(this.enemy.getxPosition(),
+                    this.enemy.getyPosition(),
+                    this.enemy.getxPosition()+this.enemy.getWidth(),
+                    this.enemy.getyPosition() + this.enemy.getWidth(),paintbrush);
 
 
             // --------------------------------

@@ -32,15 +32,16 @@ public class GameEngine extends SurfaceView implements Runnable {
     private int screenHeight;
 
     //SPRITES
-    Square bullet;
     Square enemy;
 
+    //making ArrayList for square class
+    
+    ArrayList<Square> bullets = new ArrayList<Square>();
 
     int SQUARE_WIDTH = 100;
     int score = 0;
 
-    //making ArrayList for square class
-    ArrayList<Square> bullets = new ArrayList<Square>();
+
 
     public GameEngine(Context context, int screenW, int screenH) {
         super(context);
@@ -60,7 +61,6 @@ public class GameEngine extends SurfaceView implements Runnable {
         this.bullets.add(new Square(context, 100, 150, SQUARE_WIDTH));
 
         //initialize sprites
-        bullet = new Square(context, 100, 600, SQUARE_WIDTH);
         enemy = new Square(context, 1000, 100, SQUARE_WIDTH);
     }
     @Override
@@ -172,17 +172,7 @@ public class GameEngine extends SurfaceView implements Runnable {
             paintbrush.setStyle(Paint.Style.STROKE);
             paintbrush.setStrokeWidth(8);
 
-//            //draw bullet
-//            paintbrush.setColor(Color.BLACK);
-//            canvas.drawRect(this.bullet.getxPosition(),
-//                    this.bullet.getyPosition(),
-//                    this.bullet.getxPosition()+this.bullet.getWidth(),
-//                    this.bullet.getyPosition() + this.bullet.getWidth(),paintbrush);
-//
-//            //draw bullet hitbox
-//            paintbrush.setColor(Color.RED);
-//            paintbrush.setStyle(Paint.Style.STROKE);
-//            canvas.drawRect(this.bullet.getHitBox(),paintbrush);
+
 
             for(int i = 0; i<this.bullets.size(); i++)
             {

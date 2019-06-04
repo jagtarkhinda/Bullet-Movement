@@ -23,6 +23,14 @@ public class Square {
                     this.yPosition + this.width);
     }
 
+    //call this method to draw the hitbox
+    public void updateHitBox(){
+        this.hitBox.left = this.xPosition;
+        this.hitBox.top = this.yPosition;
+        this.hitBox.right = this.xPosition + this.getWidth();
+        this.hitBox.bottom = this.yPosition + this.getWidth();
+    }
+
     public Rect getHitBox() {
         return hitBox;
     }

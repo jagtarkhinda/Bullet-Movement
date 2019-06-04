@@ -79,13 +79,7 @@ public class GameEngine extends SurfaceView implements Runnable {
         }
 
         // update the enemy hitbox
-        Rect enemyHitBox = this.enemy.getHitBox();
-
-        enemyHitBox.left = this.enemy.getxPosition();
-        enemyHitBox.top = this.enemy.getyPosition();
-        enemyHitBox.right = this.enemy.getxPosition() + this.enemy.getWidth();
-        enemyHitBox.bottom = this.enemy.getyPosition() + this.enemy.getWidth();
-        this.enemy.setHitBox(enemyHitBox);
+        this.enemy.updateHitBox();
 
         //enemy collision detection with wall
         if(this.enemy.getyPosition() >= this.screenHeight - 400)
@@ -123,13 +117,7 @@ public class GameEngine extends SurfaceView implements Runnable {
 
 
         //moving bullet hitbox
-        Rect r = this.bullet.getHitBox();
-               r.left = newX;
-                r.top = newY;
-                r.right = newX + this.bullet.getWidth();
-               r.bottom = newY + this.bullet.getWidth();
-        this.bullet.setHitBox(r);
-
+        this.bullet.updateHitBox();
 
         //Collision detection for bullet
 
@@ -143,12 +131,7 @@ public class GameEngine extends SurfaceView implements Runnable {
             this.bullet.setyPosition(600);
 
             //RESET BULLET HITBOX
-            Rect r2 = this.bullet.getHitBox();
-            r2.left = newX;
-            r2.top = newY;
-            r2.right = newX + this.bullet.getWidth();
-            r2.bottom = newY + this.bullet.getWidth();
-            this.bullet.setHitBox(r2);
+            this.bullet.updateHitBox();
         }
     }
 

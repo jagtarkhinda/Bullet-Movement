@@ -155,6 +155,23 @@ public class GameEngine extends SurfaceView implements Runnable {
                 bullet_i.updateHitBox();
             }
         }
+        Square previousBullet = this.bullets.get(0);
+
+        for (int i = 0; i < this.bullets.size(); i++) {
+                        Square currentBullet = this.bullets.get(i);
+                       int newX = previousBullet.getxPosition() + 50;
+                        currentBullet.setxPosition(newX);
+
+                               // . update the bullet hitbox position
+                                        currentBullet.updateHitBox();
+
+                                // collision rule
+                                        if (currentBullet.getHitBox().intersect(this.enemy.getHitBox())) {
+                            currentBullet.setxPosition(currentBullet.getInitialX());
+                                currentBullet.setyPosition(currentBullet.getInitialY());
+                                currentBullet.updateHitBox();
+            }
+    }
     }
 
     public void drawGame() {
@@ -216,9 +233,9 @@ public class GameEngine extends SurfaceView implements Runnable {
             paintbrush.setTextSize(100);
             paintbrush.setStrokeWidth(5);
             canvas.drawText("Score: " + this.score, 10, 100, paintbrush);
-
-
             // --------------------------------
+
+
             holder.unlockCanvasAndPost(canvas);
         }
 

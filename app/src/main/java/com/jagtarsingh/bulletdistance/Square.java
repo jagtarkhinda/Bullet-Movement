@@ -3,17 +3,32 @@ package com.jagtarsingh.bulletdistance;
 
 
 import android.content.Context;
+import android.graphics.Rect;
 
 public class Square {
 
     private int xPosition;
     private int yPosition;
     private int width;
+    Rect hitBox;
 
     public Square(Context context, int x, int y, int width) {
         this.xPosition = x;
         this.yPosition = y;
         this.width = width;
+
+        hitBox = new Rect(this.xPosition,
+                            this.yPosition,
+                        this.xPosition + this.width,
+                    this.yPosition + this.width);
+    }
+
+    public Rect getHitBox() {
+        return hitBox;
+    }
+
+    public void setHitBox(Rect hitBox) {
+        this.hitBox = hitBox;
     }
 
     public int getxPosition() {

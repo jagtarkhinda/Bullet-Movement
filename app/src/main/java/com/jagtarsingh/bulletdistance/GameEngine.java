@@ -33,6 +33,7 @@ public class GameEngine extends SurfaceView implements Runnable {
     Square bullet;
     Square enemy;
 
+
     int SQUARE_WIDTH = 100;
 
     public GameEngine(Context context, int screenW, int screenH) {
@@ -65,12 +66,13 @@ public class GameEngine extends SurfaceView implements Runnable {
     // Game Loop methods
     public void updateGame() {
 
+        //moving enemy up and down
         if(enemyMovingDown == true)
         {
-            this.enemy.setyPosition(this.enemy.getyPosition() + 5);
+            this.enemy.setyPosition(this.enemy.getyPosition() + 30);
         }
         else{
-            this.enemy.setyPosition(this.enemy.getyPosition() - 5);
+            this.enemy.setyPosition(this.enemy.getyPosition() - 30);
         }
 
         //enemy collision detection with wall
@@ -81,6 +83,7 @@ public class GameEngine extends SurfaceView implements Runnable {
         else if(this.enemy.getyPosition() <= 0) {
             enemyMovingDown = true;
         }
+        //---------------------------------------------
 
 
 
@@ -104,7 +107,15 @@ public class GameEngine extends SurfaceView implements Runnable {
         //setting new bullet position
         this.bullet.setxPosition(newX);
         this.bullet.setyPosition(newY);
+        //---------------------------------------------------------
 
+
+        //moving hitbox with the bullet
+        Rect r = this.bullet.getHitBox();
+               r.left = newX;
+                r.top = newY;
+                r.right = newX + this.bullet.getWidth();
+               r.bottom = newY + this.bullet.getWidth();
 
     }
 
@@ -135,6 +146,11 @@ public class GameEngine extends SurfaceView implements Runnable {
                     this.enemy.getyPosition(),
                     this.enemy.getxPosition()+this.enemy.getWidth(),
                     this.enemy.getyPosition() + this.enemy.getWidth(),paintbrush);
+
+            //draw enemy hitbox
+            paintbrush.setColor(Color.RED);
+            paintbrush.setStyle(Paint.Style.STROKE);
+            canvas.drawRect(this.bullet.getHitBox(),paintbrush);
 
 
             // --------------------------------

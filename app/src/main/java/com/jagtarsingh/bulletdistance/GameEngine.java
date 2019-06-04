@@ -35,7 +35,7 @@ public class GameEngine extends SurfaceView implements Runnable {
     Square enemy;
 
     //making ArrayList for square class
-    
+
     ArrayList<Square> bullets = new ArrayList<Square>();
 
     int SQUARE_WIDTH = 100;
@@ -56,9 +56,9 @@ public class GameEngine extends SurfaceView implements Runnable {
 
         //making multiple bullets
         this.bullets.add(new Square(context, 100, 600, SQUARE_WIDTH));
-        this.bullets.add(new Square(context, 100, 450, SQUARE_WIDTH));
-        this.bullets.add(new Square(context, 100, 300, SQUARE_WIDTH));
-        this.bullets.add(new Square(context, 100, 150, SQUARE_WIDTH));
+        this.bullets.add(new Square(context, 100, 600, SQUARE_WIDTH));
+        this.bullets.add(new Square(context, 100, 600, SQUARE_WIDTH));
+        this.bullets.add(new Square(context, 100, 600, SQUARE_WIDTH));
 
         //initialize sprites
         enemy = new Square(context, 1000, 100, SQUARE_WIDTH);
